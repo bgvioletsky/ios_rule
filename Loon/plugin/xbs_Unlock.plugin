@@ -1,0 +1,13 @@
+#!name= 香色闺格xbs解密
+#!desc= 这是一个用于破解香色闺格xbs解密loon脚本
+#!author= bgcode
+#!icon= https://cdn.jsdelivr.net/gh/bgvioletsky/ImgBlog/Typora/202408131733522.png
+#!tag = emby客户端破解
+
+
+[Script]
+#EmbyPremiere
+http-response ^https?:\/\/(.+\.)?jiemi\.(com|net)  script-path=https://raw.githubusercontent.com/bgvioletsky/QX/main/rewrite_remote/xbs_render/render.js,timeout=10,requires-body = true,tag=xbsUnlocked,enable=true,
+
+[MITM]
+hostname = jiemi.com, jiemi.net, *.jiemi.com, *.jiemi.net
