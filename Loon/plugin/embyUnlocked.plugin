@@ -1,3 +1,10 @@
+#!name= emby客户端
+#!desc= 这是一个带有配置项的插件，input代表输入，select代表选择（select的第一项为名称，后面为可选值），用户所填或者选择的值都可以在脚本中用$persistentStore.read进行读取，如$persistentStore.read(appName)
+#!author= bgcode
+#!icon= https://cdn.jsdelivr.net/gh/bgvioletsky/ImgBlog/Typora/202408131716394.png
+#!tag = emby客户端破解
+
+
 [Script]
 #EmbyPremiere
 http-response ^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice requires-body=1,max-size=0, script-path=https://cdn.jsdelivr.net/gh/bgvioletsky/ios_rule/Loon/Script/embyPremiere.js,tag=embyUnlocked
