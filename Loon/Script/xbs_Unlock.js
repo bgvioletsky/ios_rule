@@ -2,7 +2,7 @@
  * @Author: bgcode violetcode@icloud.com
  * @Date: 2024-10-11 21:17:59
  * @LastEditors: bgcode violetcode@icloud.com
- * @LastEditTime: 2024-10-11 22:03:51
+ * @LastEditTime: 2024-10-11 22:07:06
  * @FilePath: /ios_rule/Loon/Script/xbs_Unlock.js
  * @Description: 用于重写js脚本
  */
@@ -27,13 +27,14 @@ function getHtmlDoneHeaders() {
     })
 }
 
-$httpClient.get(myRequest).then(xx => {
+$httpClient.get(myRequest).then( (resp) => {
     const headers = getHtmlDoneHeaders()
+    this.log(resp)
     $done( {
         response: {
             status: 200,
             headers,
-            body: bg.html
+            body: resp.body
         }
     });
 }, reason => {
