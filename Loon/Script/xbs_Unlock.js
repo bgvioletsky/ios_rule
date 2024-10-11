@@ -38,7 +38,7 @@ $httpClient.get(myRequest,function(errormsg,resp,data){
             response: {
                 status: 200,
                 headers,
-                body: resp.body
+                body: data
             }
         });
     
