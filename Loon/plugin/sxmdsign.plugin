@@ -1,0 +1,13 @@
+#!name= 书香门第自动签到插件
+#!desc= 这是一个用于书香门第自动签到插件,请配置账号密码
+#!author= bgcode
+#!icon= https://raw.githubusercontent.com/Yuanxsxs/QtumultX/master/Icon/Catcat/2a4888018f37fd22.png
+
+[Argument]
+account = input, "", tag = 账号, desc = 这里需要输入有效的账号
+password = input, "", tag = 密码, desc = 这里需要输入有效的密码
+CRONEXP = input, "0 0 * * *", tag = 定时参数, desc = 这里需要输入符合CRON表达式的参数
+
+[Script]
+# 定时签到
+cron {CRONEXP} script-path = https://fastly.jsdelivr.net/gh/bgvioletsky/ios_rule@main/Loon/Script/sxmd.js, tag = 书香门第每日签到, timeout = 120, argument=[{account},{password}]
