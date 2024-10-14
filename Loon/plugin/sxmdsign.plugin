@@ -1,8 +1,7 @@
 #!name= 书香门第自动签到插件
 #!desc= 这是一个用于书香门第自动签到插件,请配置账号密码
 #!author= bgcode
-#!icon= https://raw.githubusercontent.com/Yuanxsxs/QtumultX/master/Icon/Catcat/2a4888018f37fd22.png
-
+#!icon= https://fastly.jsdelivr.net/gh/bgvioletsky/QX@master/icon/Catcat/6bcf963381a7ef42.png
 [Argument]
 account = input, "", tag = 账号, desc = 这里需要输入有效的账号
 password = input, "", tag = 密码, desc = 这里需要输入有效的密码
