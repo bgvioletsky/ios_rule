@@ -1,6 +1,7 @@
-#!name= 书香门第自动签到插件
-#!desc= 这是一个用于书香门第自动签到插件,请配置账号密码
+#!name= 书香门第签到
+#!desc= 这是一个用于书香门第自动签到插件,请配置账号密码。下方网址为书香门第官网，请自行注册。
 #!author= bgcode
+#!openUrl=https://www.txtnovel.vip
 #!icon= https://fastly.jsdelivr.net/gh/bgvioletsky/QX@master/icon/Catcat/6bcf963381a7ef42.png
 [Argument]
 account = input, "", tag = 账号, desc = 这里需要输入有效的账号
