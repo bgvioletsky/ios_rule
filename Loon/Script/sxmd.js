@@ -143,12 +143,12 @@ async function info() {
 async function task() {
   await login();
   await getformhash();
-  awaitdelay(6000)
+  await delay(6000)
   if (/已经签到过了|未开始/.test($.true)) {
     $.subt = "今日已签到"
   } else {
     await sign();
-    awaitdelay(6000)
+    await delay(10000)
   }
   await info();
   $.msg(`书香门第网址为：https://${host}`, $.subt, $.result)
