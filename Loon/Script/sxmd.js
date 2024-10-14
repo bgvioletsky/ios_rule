@@ -65,7 +65,7 @@ async function getformhash() {
         $.true = resp.body.match(
           /<div class=\"bm_h\">(.+?)<\/div>/s
         )[1];
-          headerObject = $.dsad($.cookie)
+          headerObject = $.HeaderToobject($.cookie)
           delete headerObject['dLJe_2132_invite_auth'];
           delete headerObject['dLJe_2132_loginuser'];
           delete headerObject['dLJe_2132_activationauth'];
@@ -74,8 +74,7 @@ async function getformhash() {
           let time = headerObject['dLJe_2132_lastvisit']
           headerObject['dLJe_2132_lastact'] = (Math.floor(Number(time) + 120)).toString() + '\tplugin.php\t';
           headerObject['bdshare_ty']='0x18';
-          $.log(JSON.stringify(headerObject))
-          $.cookie = headerObject;
+          $.cookie = $.objectToHeader(headerObject);
       })
 
     return true;
@@ -501,7 +500,7 @@ function Env(name, opts) {
         }
       }
     }
-    dsad(x) {
+    HeaderToobject(x) {
       const lines = x.split(';');
 
       // 创建一个空对象用于存储键值对
@@ -518,6 +517,11 @@ function Env(name, opts) {
 
       // 输出结果
       return headerObject
+    }
+    objectToHeader(obj) {
+      return Object.entries(obj)
+          .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+          .join('; ');
     }
     get(request, callback = () => { }) {
       if (request.headers) {
