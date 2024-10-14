@@ -7,6 +7,8 @@ let host = "www.txtnovel.vip"
 $.result = "【书香门第】：";
 $.cookie = ""
 $.isMute = false
+const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
 async function login() {
   try {
     let loginurl =
@@ -141,10 +143,12 @@ async function info() {
 async function task() {
   await login();
   await getformhash();
+  awaitdelay(6000)
   if (/已经签到过了|未开始/.test($.true)) {
     $.subt = "今日已签到"
   } else {
     await sign();
+    awaitdelay(6000)
   }
   await info();
   $.msg(`书香门第网址为：https://${host}`, $.subt, $.result)
