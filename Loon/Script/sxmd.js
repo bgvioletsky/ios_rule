@@ -1,30 +1,25 @@
 const $ = new Env('书香门第签到')
 const {
-    account,
-    password
-  } = $.parseArgument();
+  account,
+  password
+} = $.parseArgument();
 let host = "www.txtnovel.vip"
 $.result = "【书香门第】：";
 $.cookie = ""
 $.isMute = false
-const delay = (ms) => new Promise(res => setTimeout(res, ms));
-
 async function login() {
   try {
     let loginurl =
       `http://${host}/member.php?mod=logging&action=login&loginsubmit=yes&loginhash=LxEUe&mobile=2`;
-    data = `formhash=&referer=http%3A%2F%2F${host}%2Fplugin.php%3Fid%3Ddsu_paulsign%3Asign&fastloginfield=username&cookietime=2592000&username=${account}&password=${password}&questionid=0&answer=&submit=true
-            `
+    data = `formhash=&referer=http%3A%2F%2F${host}%2Fplugin.php%3Fid%3Ddsu_paulsign%3Asign&fastloginfield=username&cookietime=2592000&username=${account}&password=${password}&questionid=0&answer=&submit=true`
     let headers = {
       Host: `${host}`,
       referer: `http://${host}/member.php?mod=logging&action=login&mobile=2`,
       cookie: $.cookie,
       "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Snapchat/10.77.5.59 (like Safari/604.1)",
     }
-
     const myRequest = {
       url: loginurl,
-      method: 'POST', // Optional, default GET.
       headers: headers,
       body: JSON.stringify(data)
     };
@@ -32,12 +27,10 @@ async function login() {
       (resp) => {
         resdata = JSON.stringify(resp);
         if (resdata.match(/欢迎您回来/)) {
-
           let x = resp.headers["Set-Cookie"]
           $.cookie = x.replace(/expires.*?;|path.*?,|path=\//g, '');
           return true;
         } else {
-
           return false;
         }
       }
@@ -47,6 +40,7 @@ async function login() {
     $.log(err);
   }
 }
+
 async function getformhash() {
   try {
     let url = `http://${host}/plugin.php?id=dsu_paulsign:sign&mobile=yes`;
@@ -56,6 +50,7 @@ async function getformhash() {
       cookie: $.cookie,
       "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Snapchat/10.77.5.59 (like Safari/604.1)",
     }
+
     const myRequest = {
       url: url,
       method: 'GET', // Optional, default GET.
@@ -70,7 +65,19 @@ async function getformhash() {
         $.true = resp.body.match(
           /<div class=\"bm_h\">(.+?)<\/div>/s
         )[1];
+          headerObject = $.dsad($.cookie)
+          delete headerObject['dLJe_2132_invite_auth'];
+          delete headerObject['dLJe_2132_loginuser'];
+          delete headerObject['dLJe_2132_activationauth'];
+          delete headerObject['dLJe_2132_pmnum'];
+          delete headerObject['dLJe_2132_lastact'];
+          let time = headerObject['dLJe_2132_lastvisit']
+          headerObject['dLJe_2132_lastact'] = (Math.floor(Number(time) + 120)).toString() + '\tplugin.php\t';
+          headerObject['bdshare_ty']='0x18';
+          $.log(JSON.stringify(headerObject))
+          $.cookie = headerObject;
       })
+
     return true;
   } catch (err) {
     console.log(err);
@@ -81,7 +88,7 @@ async function getformhash() {
 async function sign() {
   try {
     let url = `http://${host}/plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=0&inajax=0&mobile=yes`;
-    let data = `formhash=${$.formhash}&qdxq=kx`;
+    let data = `formhash=c80bd3e8&qdxq=kx`;
     let headers = {
       Host: `${host}`,
       referer: `http://${host}/plugin.php?id=dsu_paulsign:sign&mobile=yes`,
@@ -89,7 +96,6 @@ async function sign() {
       "Content-Type": "application/x-www-form-urlencoded",
       "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Snapchat/10.77.5.59 (like Safari/604.1)",
     }
-
     const myRequest = {
       url: url,
       method: 'POST', // Optional, default GET.
@@ -102,8 +108,6 @@ async function sign() {
         $.subt = "签到成功！"
         return true;
       } else {
-        $.log("签到参数：" + data)
-        $.log("签到返回：" + res.body)
         $.subt = "签到失败！"
         return false;
       }
@@ -143,12 +147,10 @@ async function info() {
 async function task() {
   await login();
   await getformhash();
-  await delay(6000)
   if (/已经签到过了|未开始/.test($.true)) {
     $.subt = "今日已签到"
   } else {
     await sign();
-    await delay(10000)
   }
   await info();
   $.msg(`书香门第网址为：https://${host}`, $.subt, $.result)
@@ -499,7 +501,24 @@ function Env(name, opts) {
         }
       }
     }
+    dsad(x) {
+      const lines = x.split(';');
 
+      // 创建一个空对象用于存储键值对
+      const headerObject = {};
+
+      // 遍历每一行并解析键值对
+      lines.forEach(line => {
+        const trimmedLine = line.trim(); // 去除前后空白
+        if (trimmedLine) { // 检查是否为空行
+          const [key, value] = trimmedLine.split('=');
+          headerObject[key.trim()] = decodeURIComponent(value.trim());
+        }
+      });
+
+      // 输出结果
+      return headerObject
+    }
     get(request, callback = () => { }) {
       if (request.headers) {
         delete request.headers['Content-Type']
@@ -790,6 +809,7 @@ function Env(name, opts) {
      * @param {*} opts 通知参数
      *
      */
+
     msg(title = name, subt = '', desc = '', opts = {}) {
       const toEnvOpts = (rawopts) => {
         const { $open, $copy, $media, $mediaMime } = rawopts

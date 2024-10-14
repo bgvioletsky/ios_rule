@@ -1,7 +1,12 @@
 #!name= 书香门第签到
 #!desc= 请配置账号密码，默认签到时间为晚上0点0分。
-#!author= bgcode
-#!icon= https://fastly.jsdelivr.net/gh/bgvioletsky/QX@master/icon/Catcat/6bcf963381a7ef42.png
+#!author= bgcode🅥[https://raw.githubusercontent.com/bgvioletsky/ios_rule/refs/heads/main/README.md]
+#!homepage = https://raw.githubusercontent.com/bgvioletsky/ios_rule/refs/heads/main/README.md
+#!openUrl = http://www.txtnovel.vip/
+#!icon= https://fastly.jsdelivr.net/gh/bgvioletsky/ios_rule@main/Loon/src/src.png
+#!date = 2024-10-25 15:16:38
+#!tag = 签到
+
 
 [Argument]
 account = input, "", tag = 账号, desc = 这里需要输入有效的账号
