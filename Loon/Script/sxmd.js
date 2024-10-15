@@ -65,16 +65,6 @@ async function getformhash() {
         $.true = resp.body.match(
           /<div class=\"bm_h\">(.+?)<\/div>/s
         )[1];
-          headerObject = $.HeaderToobject($.cookie)
-          delete headerObject['dLJe_2132_invite_auth'];
-          delete headerObject['dLJe_2132_loginuser'];
-          delete headerObject['dLJe_2132_activationauth'];
-          delete headerObject['dLJe_2132_pmnum'];
-          delete headerObject['dLJe_2132_lastact'];
-          let time = headerObject['dLJe_2132_lastvisit']
-          headerObject['dLJe_2132_lastact'] = (Math.floor(Number(time) + 120)).toString() + '\tplugin.php\t';
-          headerObject['bdshare_ty']='0x18';
-          $.cookie = $.objectToHeader(headerObject);
       })
 
     return true;
@@ -99,7 +89,7 @@ async function sign() {
       url: url,
       method: 'POST', // Optional, default GET.
       headers: headers,
-      body: JSON.stringify(data)
+      body: data
     };
     await $.http.post(myRequest).then((res) => {
       let message = res.body.match(/<div id=\"messagetext\">.*?<p>(.+?)<\/p>/s);
