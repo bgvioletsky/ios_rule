@@ -2,7 +2,8 @@ const $ = new Env('书香门第签到')
 const {
   account,
   password
-} = $.parseArgument();
+} = $.parseArgument( account,
+  password);
 let host = "www.txtnovel.vip"
 $.result = "【书香门第】：";
 $.cookie = ""
@@ -247,7 +248,13 @@ function Env(name, opts) {
     isStash() {
       return 'Stash' === this.getEnv()
     }
-
+    parseArgument(...args) {
+      let k=[]
+      for (let arg of args) {
+        if (arg) k.push(this.getval(arg)) 
+      }
+      return   k
+         }
     toObj(str, defaultValue = null) {
       try {
         return JSON.parse(str)
@@ -510,8 +517,8 @@ function Env(name, opts) {
     }
     objectToHeader(obj) {
       return Object.entries(obj)
-          .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-          .join('; ');
+        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+        .join('; ');
     }
     get(request, callback = () => { }) {
       if (request.headers) {
