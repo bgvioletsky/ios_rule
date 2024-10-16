@@ -2,8 +2,7 @@ const $ = new Env('书香门第签到')
 const {
   account,
   password
-} = $.parseArgument( account,
-  password);
+} = $.parseArgument()
 let host = "www.txtnovel.vip"
 $.result = "【书香门第】：";
 $.cookie = ""
@@ -248,13 +247,9 @@ function Env(name, opts) {
     isStash() {
       return 'Stash' === this.getEnv()
     }
-    parseArgument(...args) {
-      let k=[]
-      for (let arg of args) {
-        if (arg) k.push(this.getval(arg)) 
-      }
-      return   k
-         }
+    parseArgument() {
+      return globalThis.$argument ? 'object' == typeof $argument ? $argument : Object.fromEntries($argument.split('&').map((t => t.split('=')))) : {}
+    }
     toObj(str, defaultValue = null) {
       try {
         return JSON.parse(str)
