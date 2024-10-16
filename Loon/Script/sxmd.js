@@ -21,7 +21,7 @@ async function login() {
     const myRequest = {
       url: loginurl,
       headers: headers,
-      body: JSON.stringify(data)
+      body: data
     };
     await $.http.post(myRequest).then(
       (resp) => {
@@ -77,7 +77,7 @@ async function getformhash() {
 async function sign() {
   try {
     let url = `http://${host}/plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=0&inajax=0&mobile=yes`;
-    let data = `formhash=c80bd3e8&qdxq=kx`;
+    let data = `formhash=${$.formhash}&qdxq=kx`;
     let headers = {
       Host: `${host}`,
       referer: `http://${host}/plugin.php?id=dsu_paulsign:sign&mobile=yes`,
