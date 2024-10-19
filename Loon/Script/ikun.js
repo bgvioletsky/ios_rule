@@ -4,7 +4,7 @@ const {
   password
 } = $.parseArgument()
 
-
+$.cookie=''
 async function login() {
     try {
       const url = `https://ikuuu.pw/auth/login`;
@@ -29,8 +29,9 @@ async function login() {
       };
       await $.http.post(myRequest).then(
         (resp) => {
-           $.log(JSON.stringify(resp.statusCode+ "\n\n" + resp.body))
-            return true;
+           $.cookie = resp.headers["Set-Cookie"].replace(/expires.*?;| Max.*?;|path.*?,|path=\//g, '');
+           $.denglu=resp.statusCode===200 ? "登陆成功" :"登陆失败";
+           return true;
          
         }
       )
@@ -47,7 +48,7 @@ async function sign() {
       const url = `https://ikuuu.pw/user/checkin`;
       const method = `POST`;
       const headers = {
-      'Cookie' : `email=bglhcode%40qq.com; expire_in=1729911987; ip=154d11dd5f2ba292176722ab3ac3b933; key=a1b955b7fa986f9f73d787561fc6a978601536604a6e1; uid=2814007`,
+      'Cookie' : $.cookie,
       'Accept' : `*/*`,
       'Connection' : `keep-alive`,
       'Referer' : `https://ikuuu.pw/user`,
@@ -66,20 +67,18 @@ async function sign() {
       };
       
       $.http.post(myRequest).then(response => {
-          console.log(response.statusCode + "\n\n" + response.body);
-          $done();
+          $.qiandao=response.statusCode===200 ? "签到成功" :"签到失败";
       }, reason => {
           console.log(reason.error);
-          $done();
       });
       
     }catch{}
 }
 async function task() {
     await login();
-    // await sign();
+    await sign();
   
-    $.msg(`ikun网址为：https://ikuuu.pw`, '签到成功')
+    $.msg(`ikun网址为：https://ikuuu.pw`,$.denglu, $.qiandao)
     $.done();
   }
   task()
