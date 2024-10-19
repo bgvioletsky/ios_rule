@@ -7,21 +7,29 @@ const {
 
 async function login() {
     try {
-      let loginurl =
-        `https://ikuuu.pw/auth/login`;
-      data = `host=ikuuu.pw&email=${account}&passwd=${password}&code=&remember_me=on`
-       let headers = {
-        "Content-Type": `application/x-www-form-urlencoded; charset=UTF-8`,
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Snapchat/10.77.5.59 (like Safari/604.1)",
-      }
+      const url = `https://ikuuu.pw/auth/login`;
+      const method = `POST`;
+      const headers = {
+      'Cookie' : ``,
+      'Accept' : `*/*`,
+      'Connection' : `keep-alive`,
+      'Content-Type' : `application/x-www-form-urlencoded; charset=UTF-8`,
+      'Accept-Encoding' : `gzip, deflate, br`,
+      'Host' : `ikuuu.pw`,
+      'User-Agent' : `Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1`,
+      'Accept-Language' : `zh-CN,zh-Hans;q=0.9`
+      };
+      const body = `host=ikuuu.pw&email=bglhcode%40qq.com&passwd=%258FQ%5EdC4TdQUg&code=&remember_me=on`;
+      
       const myRequest = {
-        url: loginurl,
-        headers: headers,
-        body: data
+          url: url,
+          method: method,
+          headers: headers,
+          body: body
       };
       await $.http.post(myRequest).then(
         (resp) => {
-           $.log(JSON.stringify(resp.headers))
+           $.log(JSON.stringify(resp.statusCode+ "\n\n" + resp.body))
             return true;
          
         }
@@ -32,30 +40,44 @@ async function login() {
     }
   }
   
+
+
 async function sign() {
     try{
-        let loginurl =
-        `https://ikuuu.pw/user/checkin`;
-       let headers = {
-        "Content-Type": `application/x-www-form-urlencoded; charset=UTF-8`,
-        referer:'https://ikuuu.pw/user',
-        cookie: $.cookie,
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Snapchat/10.77.5.59 (like Safari/604.1)",
-      }
-      const myRequest = {
-        url: loginurl,
-        headers: headers,
+      const url = `https://ikuuu.pw/user/checkin`;
+      const method = `POST`;
+      const headers = {
+      'Cookie' : `email=bglhcode%40qq.com; expire_in=1729911987; ip=154d11dd5f2ba292176722ab3ac3b933; key=a1b955b7fa986f9f73d787561fc6a978601536604a6e1; uid=2814007`,
+      'Accept' : `*/*`,
+      'Connection' : `keep-alive`,
+      'Referer' : `https://ikuuu.pw/user`,
+      'Accept-Encoding' : `gzip, deflate, br`,
+      'Host' : `ikuuu.pw`,
+      'User-Agent' : `Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1`,
+      'Accept-Language' : `zh-CN,zh-Hans;q=0.9`
       };
-        $.http.post(myRequest).then(
-            (er)=>{
-                return true;
-            }
-        )
+      const body = ``;
+      
+      const myRequest = {
+          url: url,
+          method: method,
+          headers: headers,
+          body: body
+      };
+      
+      $.http.post(myRequest).then(response => {
+          console.log(response.statusCode + "\n\n" + response.body);
+          $done();
+      }, reason => {
+          console.log(reason.error);
+          $done();
+      });
+      
     }catch{}
 }
 async function task() {
     await login();
-    await sign();
+    // await sign();
   
     $.msg(`ikun网址为：https://ikuuu.pw`, '签到成功')
     $.done();
