@@ -21,6 +21,7 @@ async function login() {
       };
       await $.http.post(myRequest).then(
         (resp) => {
+           $.log(JSON.stringify(resp.headers))
             return true;
          
         }
