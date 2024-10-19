@@ -1,7 +1,7 @@
 <!--
  * @Author: bgcode
  * @Date: 2024-10-15 03:07:06
- * @LastEditTime: 2024-10-15 03:34:06
+ * @LastEditTime: 2024-10-19 10:46:50
  * @LastEditors: bgcode
  * @Description: 描述   
  * @FilePath: /ios_rule/Loon/plugin/README.md
@@ -19,4 +19,8 @@ https://fastly.jsdelivr.net/gh/bgvioletsky/ios_rule@main/Loon/plugin/sxmd_sign.p
 #### 3、香色闺阁源仓库
 ```
 https://fastly.jsdelivr.net/gh/bgvioletsky/ios_rule@main/Loon/plugin/xbs_Unlock.plugin
+```
+#### 4、ikun签到
+```
+https://fastly.jsdelivr.net/gh/bgvioletsky/ios_rule@main/Loon/plugin/ikun_sign.plugin
 ```
