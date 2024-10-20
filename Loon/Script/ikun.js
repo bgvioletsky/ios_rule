@@ -29,7 +29,8 @@ async function login() {
       };
       await $.http.post(myRequest).then(
         (resp) => {
-           $.cookie = resp.headers["Set-Cookie"].replace(/expires.*?;| Max.*?;|path.*?,|path=\//g, '');
+           data= resp.headers["Set-Cookie"];
+           $.cookie=data.replace(/expires.*?;|path.*?,|path=\//g, '');
            $.denglu=resp.statusCode===200 ? "登陆成功" :"登陆失败";
            return true;
          
