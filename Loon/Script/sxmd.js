@@ -25,7 +25,7 @@ async function login() {
           headers: headers,
           body: data
       };
-      await $.http.get(myRequest).then(
+      await $.http.post(myRequest).then(
           (resp) => {
               resdata = JSON.stringify(resp);
               if (resdata.match(/欢迎您回来/)) {
@@ -93,7 +93,7 @@ async function sign() {
           headers: headers,
           body: data
       };
-      await $.http.get(myRequest).then((res) => {
+      await $.http.post(myRequest).then((res) => {
           let message = res.body.match(/<div id=\"messagetext\">.*?<p>(.+?)<\/p>/s);
           if (message) {
               $.subt = "签到成功!"
