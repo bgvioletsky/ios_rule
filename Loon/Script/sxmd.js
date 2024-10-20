@@ -23,7 +23,7 @@ async function login() {
           url: loginurl,
           method: 'POST', // Optional, default GET.
           headers: headers,
-          body: JSON.stringify(data)
+          body: data
       };
       await $.http.get(myRequest).then(
           (resp) => {
