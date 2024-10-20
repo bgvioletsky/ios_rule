@@ -19,7 +19,7 @@ async function login() {
       'User-Agent' : `Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1`,
       'Accept-Language' : `zh-CN,zh-Hans;q=0.9`
       };
-      const body = `host=ikuuu.pw&email=bglhcode%40qq.com&passwd=%258FQ%5EdC4TdQUg&code=&remember_me=on`;
+      const body = `host=ikuuu.pw&email=${account}&passwd=${password}&code=&remember_me=on`;
       
       const myRequest = {
           url: url,
